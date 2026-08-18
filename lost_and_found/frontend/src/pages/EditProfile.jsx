@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_BASE } from "../services/api";
 
 export default function EditProfile({currentUser, setCurrentUser}) {
   const [user, setUser] = useState(null);
@@ -21,7 +22,7 @@ export default function EditProfile({currentUser, setCurrentUser}) {
   useEffect(() => {
   async function loadUser() {
     try {
-      const res = await fetch("http://localhost:5050/api/users/me", {
+      const res = await fetch(`${API_BASE}/users/me`, {
         credentials: "include",
       });
 
@@ -62,7 +63,7 @@ export default function EditProfile({currentUser, setCurrentUser}) {
     setSaving(true);
 
     try {
-      const res = await fetch("http://localhost:5050/api/users/me", {
+      const res = await fetch(`${API_BASE}/users/me`, {
         method: "PUT",
         credentials: "include",
         headers: {

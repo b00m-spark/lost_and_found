@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ReactComponent as LocIcon } from "../images/loc.svg";
 import { Link, useNavigate } from "react-router-dom";
-import { deletePost } from "../services/api";
+import { BACKEND_BASE, deletePost } from "../services/api";
 
 export default function CardPost({
   post,
@@ -11,9 +11,6 @@ export default function CardPost({
   clickable = true,
   currentUser = null,
 }) {
-  const [contact, setContact] = useState("");
-  const [loadingContact, setLoadingContact] = useState(false);
-  const [showContact, setShowContact] = useState(false);
   const isResolved =
     post.status === "Resolved" || post.resolved === 1 || post.resolved === true;
   const mode = viewMode === "card" ? "cardPostCard" : "cardPostCol";
@@ -57,27 +54,6 @@ export default function CardPost({
     setShowOptions(false);
   };
 
-  const fetchContact = async (e) => {
-    e.stopPropagation();
-    if (contact || loadingContact) return;
-
-    setLoadingContact(true);
-    try {
-      const res = await fetch(
-        `http://localhost:5050/api/users/${post.user_id}/contact`,
-        { credentials: "include" }
-      );
-      if (!res.ok) throw new Error("Failed to fetch contact");
-      const data = await res.json();
-      setContact(data.email);
-      setShowContact(true);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoadingContact(false);
-    }
-  };
-
   return (
     <div className={`cardPost ${mode}`}>
       <article className="post" onClick={handleClick}>
@@ -118,7 +94,7 @@ export default function CardPost({
           {post.file_path && (
             <div className="mediaContainer">
               <img
-                src={`http://localhost:5050/${post.file_path}`}
+                src={`${BACKEND_BASE}/${post.file_path}`}
                 alt="Lost item"
                 className="postImage"
               />

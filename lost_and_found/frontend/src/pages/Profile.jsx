@@ -77,7 +77,7 @@ export default function Profile({ posts, setPosts }) {
  useEffect(() => {
   async function fetchUser() {
       try {
-        const res = await fetch("http://localhost:5050/api/users/me", {
+        const res = await fetch(`${API_BASE}/users/me`, {
           credentials: "include",       // required for session cookies
         });
 

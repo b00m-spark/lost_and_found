@@ -1,4 +1,5 @@
-export const API_BASE = 'http://localhost:5050/api'
+export const BACKEND_BASE = import.meta.env.VITE_BACKEND_BASE || 'http://localhost:5050';
+export const API_BASE = `${BACKEND_BASE}/api`;
 // TODO, remove try catch => bubble to Signup.jsx/Login.jsx
 export async function login({ email, password }) {
     try {
