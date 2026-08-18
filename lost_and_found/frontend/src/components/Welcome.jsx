@@ -1,47 +1,54 @@
 import { Link } from "react-router-dom";
 import "../css/main.css";
-import logo from "../images/logo.png";
 
 export default function Welcome() {
   return (
     <div className="welcomeScrollContainer">
       <section className="hero">
-        <div className="wrapper">
-          <img src={logo} alt="Lost and Found Logo" className="siteLogo" /> 
-          <div className="linkBar">
-            <Link to="/login">
-              <button className="btnStyle">Login</button>
-            </Link>
-            <Link to="/browse">
-              <button className="btnStyle">Get Started</button>
-            </Link>
+        <div className="heroInner">
+          <div className="heroCopy">
+            <p className="eyebrow">UCLA campus lost and found</p>
+            <h1>Find what’s missing. Return what’s found.</h1>
+            <p>
+              Browse active reports, search by item type, or post something you
+              lost or found around campus.
+            </p>
+            <div className="linkBar">
+              <Link to="/browse">
+                <button className="btnStyle">Browse reports</button>
+              </Link>
+              <Link to="/login">
+                <button className="btnStyle secondaryBtn">Log in</button>
+              </Link>
+            </div>
+          </div>
+
+          <div className="quickPanel" aria-label="Lost and found workflow">
+            <div>
+              <span>1</span>
+              <strong>Search first</strong>
+              <p>Check recent lost and found reports before posting.</p>
+            </div>
+            <div>
+              <span>2</span>
+              <strong>Report clearly</strong>
+              <p>Add category, location, contact info, and a photo if useful.</p>
+            </div>
+            <div>
+              <span>3</span>
+              <strong>Mark returned</strong>
+              <p>Resolve your post once the item gets back home.</p>
+            </div>
           </div>
         </div>
 
-        <div className="laf">
-          <div className="lafText">
-            <h1>Join thousands of users finding their lost items every day.</h1>
-            <h1>Lost something? Found something? We help Bruin items find their way home.</h1>
-            <div className="scrollArrow">&#x2193;</div>
-          </div>
-        </div>
-      </section>
-
-      <section className="features">
-        <h2>Our Features</h2>
-        <div className="featureCards">
-          <div className="featureCard">
-            <h3>Search Lost Items</h3>
-            <p>Easily find items reported lost by the community.</p>
-          </div>
-          <div className="featureCard">
-            <h3>Claim Found Items</h3>
-            <p>Quickly report and claim items you have found.</p>
-          </div>
-          <div className="featureCard">
-            <h3>Community Support</h3>
-            <p>Connect with other users and help return items.</p>
-          </div>
+        <div className="featureStrip">
+          <span>Lost</span>
+          <span>Found</span>
+          <span>Electronics</span>
+          <span>Keys</span>
+          <span>Wallets</span>
+          <span>Bags</span>
         </div>
       </section>
     </div>
