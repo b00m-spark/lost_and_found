@@ -11,6 +11,9 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
+const isProduction = process.env.NODE_ENV === "production";
+
+app.set("trust proxy", 1);
 
 app.use(cors({
   origin: process.env.FRONTEND_URL || "http://localhost:5178",
@@ -25,6 +28,8 @@ app.use(session({
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
+    sameSite: isProduction ? "none" : "lax",
+    secure: isProduction,
     maxAge: 1000 * 60 * 60,
   }
 }));
