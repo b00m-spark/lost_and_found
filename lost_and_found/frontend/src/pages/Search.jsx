@@ -3,7 +3,7 @@ import CardPost from "../components/CardPost";
 import { ReactComponent as SearchIcon } from "../images/search.svg";
 import { markResolved } from "../services/api.js";
 
-export default function Search({ posts, setAllPosts, currentUser }) {
+export default function Search({ posts, setAllPosts }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedType, setSelectedType] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -57,7 +57,6 @@ export default function Search({ posts, setAllPosts, currentUser }) {
     );
   }, [posts, searchQuery, selectedType, selectedCategory]);
 
-  // Event handler
   const handleMarkResolved = async (postId) => {
     console.assert(postId != null, "postId must be provided");
     await markResolved(postId);
@@ -69,10 +68,8 @@ export default function Search({ posts, setAllPosts, currentUser }) {
     );
   };
 
-  // Render
   return (
     <div className="searchContent">
-      {/* Type filter */}
       <div className="filtersWrapper">
         <select
           value={selectedType}
@@ -82,8 +79,6 @@ export default function Search({ posts, setAllPosts, currentUser }) {
           <option value="Lost">Lost</option>
           <option value="Found">Found</option>
         </select>
-
-        {/* Category filter */}
         <select
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
@@ -98,8 +93,6 @@ export default function Search({ posts, setAllPosts, currentUser }) {
           <option value="Other">Other</option>
         </select>
       </div>
-
-      {/* Search box */}
       <div className="searchHWrapper">
         <SearchIcon style={{ width: 30, height: 30 }} />
         <input
@@ -109,8 +102,6 @@ export default function Search({ posts, setAllPosts, currentUser }) {
           onChange={(e) => setSearchQuery(e.target.value)}
         />
       </div>
-
-      {/* Search result */}
       <div className="browseWrapper">
         {visiblePosts.length === 0 ? (
           <div>No posts found</div>
@@ -121,7 +112,6 @@ export default function Search({ posts, setAllPosts, currentUser }) {
               post={post}
               viewMode="card"
               onResolved={handleMarkResolved}
-              currentUser={currentUser}
             />
           ))
         )}

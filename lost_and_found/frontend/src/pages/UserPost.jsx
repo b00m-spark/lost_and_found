@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { getPostById } from "../services/api";
 import CardPost from "../components/CardPost";
 
-export default function UserPost({ currentUser }) {
+export default function UserPost() {
   const { postId } = useParams();
   const [post, setPost] = useState(null);
 
@@ -33,7 +33,6 @@ export default function UserPost({ currentUser }) {
             viewMode="column"
             isAccountOwner={false}
             clickable={false}
-            currentUser={currentUser}
           />
           <p>Contact: {post.contact}</p>
         </div>

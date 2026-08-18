@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import CardPost from "../components/CardPost";
 import { markResolved } from "../services/api";
 
-export default function Browse({ posts, setPosts, currentUser }) {
+export default function Browse({ posts, setPosts }) {
   const [filterType, setFilterType] = useState("all");
 
   const filteredFeed =
@@ -40,7 +40,6 @@ export default function Browse({ posts, setPosts, currentUser }) {
               viewMode="card"
               isAccountOwner={false}
               onResolved={handleResolved}
-              currentUser={currentUser}
             />
           ))}
         </div>

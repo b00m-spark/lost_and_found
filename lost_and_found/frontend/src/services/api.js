@@ -1,20 +1,19 @@
 export const BACKEND_BASE = import.meta.env.VITE_BACKEND_BASE || 'http://localhost:5050';
 export const API_BASE = `${BACKEND_BASE}/api`;
-// TODO, remove try catch => bubble to Signup.jsx/Login.jsx
+
 export async function login({ email, password }) {
     try {
-        // define response
         const response = await fetch(`${API_BASE}/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
             body: JSON.stringify({ email, password })
         });
-        // check if http error status code
+
         if (!response.ok) {
             throw new Error(`HTTP error; status: ${response.status}`);
         }
-        // parse response body as json
+
         const loginData = await response.json();
         return loginData;
     } catch (error) {
@@ -24,19 +23,18 @@ export async function login({ email, password }) {
 
 export async function signup({ name, email, password }) {
     
-        // define response
         const response = await fetch(`${API_BASE}/auth/signup`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
             body: JSON.stringify({ name, email, password })
         });
-        // check if http error status code 
+
         if (!response.ok) {
             const errorData = await response.json();
             throw new Error(errorData.message || `HTTP error; status: ${response.status}`);
         }
-        // parse response body as json
+
         const signupData = await response.json();
         return signupData;
     

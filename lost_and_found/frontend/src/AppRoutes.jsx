@@ -9,7 +9,6 @@ import Browse from "./pages/Browse";
 import Search from "./pages/Search";
 import UserPost from "./pages/UserPost";
 import Layout from "./layouts/Layout";
-import EditProfile from "./pages/EditProfile";
 import { getPosts, fetchMe, markResolved } from "./services/api";
 
 export default function AppRoutes() {
@@ -73,11 +72,6 @@ export default function AppRoutes() {
           />
         }
       />
-      <Route 
-        path="/edit-profile" 
-        element={<EditProfile currentUser={currentUser} setCurrentUser={setCurrentUser}/>} 
-      />
-
       <Route
         path="/login"
         element={<Login setCurrentUser={setCurrentUser} />}
@@ -102,7 +96,6 @@ export default function AppRoutes() {
               posts={posts}
               setPosts={setPosts}
               onResolved={handleResolved}
-              currentUser={currentUser}
             />
           }
         />
@@ -112,7 +105,6 @@ export default function AppRoutes() {
             <Search
               posts={posts}
               setAllPosts={setPosts}
-              currentUser={currentUser}
             />
           }
         />
@@ -122,7 +114,7 @@ export default function AppRoutes() {
         />
         <Route
           path="/posts/:postId"
-          element={<UserPost currentUser={currentUser} />}
+          element={<UserPost />}
         />
         
       </Route>

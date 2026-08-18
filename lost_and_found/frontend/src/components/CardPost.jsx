@@ -9,7 +9,6 @@ export default function CardPost({
   isAccountOwner = false,
   onResolved,
   clickable = true,
-  currentUser = null,
 }) {
   const isResolved =
     post.status === "Resolved" || post.resolved === 1 || post.resolved === true;
@@ -24,13 +23,6 @@ export default function CardPost({
 
   const handleClick = () => {
     if (!clickable) return;
-    /*
-    if (!currentUser) {
-      nav("/login");
-      console.log("User not logged in");
-      return;
-    }
-      */
     nav(`/posts/${post.id}`);
   };
 

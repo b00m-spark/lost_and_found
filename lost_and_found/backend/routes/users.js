@@ -1,20 +1,7 @@
-// routes/users.js
 import express from "express";
-import { findUserById, updateUserById } from "../models/userModel.js";
+import { findUserById } from "../models/userModel.js";
 
 const router = express.Router();
-
-router.put("/me", (req, res) => {
-  if (!req.session.user) return res.status(401).json({ message: "Not logged in" });
-
-  const userId = req.session.user.id;
-  const { name, email } = req.body;
-
-  updateUserById(userId, { name, email }, (err, results) => {
-    if (err) return res.status(500).json({ message: "Database error" });
-    return res.json({ message: "Profile updated", user: { id: userId, name, email } });
-  });
-});
 
 router.get("/me", (req, res) => {
   if (!req.session.user) {
@@ -36,6 +23,7 @@ router.get("/me", (req, res) => {
   });
   
 });
+
 export default router;
 
 

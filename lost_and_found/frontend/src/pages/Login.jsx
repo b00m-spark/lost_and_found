@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Login({ setCurrentUser }) {
   const [loginData, setLoginData] = useState({ email: "", password: "" });
-  const [err, setErr] = useState(null); // TODO: Catch error thrown from api.js
+  const [err, setErr] = useState(null);
   const [loading, setLoading] = useState(false);
   const nav = useNavigate();
 
@@ -15,14 +15,10 @@ export default function Login({ setCurrentUser }) {
   };
 
   async function handleSubmit(e) {
-    e.preventDefault(); // prevents refresh
-    console.log("handleSubmit triggered");
+    e.preventDefault();
     setErr(null);
     setLoading(true);
     try {
-      //       Send request => call login()
-      //       Store data in local storage
-      //       nav to personal profile (dashboard from user story).
       const userData = await login(loginData);
       const user =
         userData.user ?? (userData.userId ? { id: userData.userId } : null);
@@ -40,10 +36,9 @@ export default function Login({ setCurrentUser }) {
       setLoading(false);
     }
   }
-  // TODO if (loading) {...}
+
   return (
     <>
-      {/*Header*/}
       <div className="loginWrapper">
         <div className="loginCard">
           <h1>Lost & Found</h1>

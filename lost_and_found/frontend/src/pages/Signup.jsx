@@ -9,7 +9,7 @@ export default function Signup() {
     email: "",
     password: "",
   });
-  const [err, setErr] = useState(null); // TODO: Catch error thrown from api.js
+  const [err, setErr] = useState(null);
   const [loading, setLoading] = useState(false);
   const nav = useNavigate();
 
@@ -19,7 +19,7 @@ export default function Signup() {
   };
 
   async function handleSubmit(e) {
-    e.preventDefault(); // prevents refresh
+    e.preventDefault();
     setErr(null);
     setLoading(true);
     if (!signupData.name) {
@@ -38,22 +38,12 @@ export default function Signup() {
       return;
     }
     try {
-      const userData = await signup(signupData);
-      console.log(userData);
-      /*
-      if (!userData) {
-        //assume email already taken
-        setErr("Email already in use. Try logging in.");
-      }
-      const validUserData = () => {
-        return userData.token && (userData.user?.id || userData.userId);
-      };
-      */
+      await signup(signupData);
       nav("/login");
     } catch (error) {
       console.error("Erroneous data: ", error);
       if (error.message && error.message.includes("Email already registered")) {
-        setErr("Email already in use. Try logging in."); // <--- Your desired message
+        setErr("Email already in use. Try logging in.");
       } else {
         setErr("Signup failed. Please try again.");
       }
@@ -61,10 +51,9 @@ export default function Signup() {
       setLoading(false);
     }
   }
-  // TODO if (loading) {...}
+
   return (
     <>
-      {/*Header*/}
       <div className="loginWrapper">
         <div className="loginCard">
           <h1>Lost & Found</h1>

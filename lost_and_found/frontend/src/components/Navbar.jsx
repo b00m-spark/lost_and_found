@@ -24,7 +24,6 @@ export default function Navbar({ currentUser, onPostClick }) {
           <h2>Lost & Found</h2>
         </div>
         <ul className="navbar-links"></ul>
-        {/* Browse */}
         <li>
           <button
             className={location.pathname === "/browse" ? "active" : ""}
@@ -34,7 +33,6 @@ export default function Navbar({ currentUser, onPostClick }) {
           </button>
         </li>
 
-        {/* Search */}
         <li>
           <button
             className={location.pathname === "/search" ? "active" : ""}
@@ -44,14 +42,12 @@ export default function Navbar({ currentUser, onPostClick }) {
           </button>
         </li>
 
-        {/* Post */}
         <li>
           <button className="icon-button" onClick={onPostClick}>
             <PostIcon width={40} height={40} />
           </button>
         </li>
 
-        {/* Profile */}
         <li>
           <button className={location.pathname.startsWith("/profile") ? "active" : ""} onClick={handleProfileClick}>
             <ProfileIcon width={40} height={40} />

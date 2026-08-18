@@ -1,5 +1,3 @@
-//Helper functions that interact with mysql database
-
 import db from "../db/connection.js";
 
 export const createUser = (name, email, hashedPassword, callback) => {
@@ -15,13 +13,4 @@ export const findUserByEmail = (email, callback) => {
 export const findUserById = (id, callback) => {
   const sql = "SELECT * FROM users WHERE id = ?";
   db.query(sql, [id], callback);
-}
-
-export function updateUserById(id, { name, email }, callback) {
-  const sql = `
-    UPDATE users
-    SET name = ?, email = ?
-    WHERE id = ?
-  `;
-  db.query(sql, [name, email, id], callback);
 }

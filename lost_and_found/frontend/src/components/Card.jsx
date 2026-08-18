@@ -11,7 +11,6 @@ export default function Card({ onClose, onReport }) {
   function handleSubmit(e) {
     e.preventDefault();
     const post = {
-      //id: crypto.randomUUID?.() ?? String(Date.now()),
       title,
       post_type: type,
       description,
