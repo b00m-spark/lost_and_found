@@ -37,6 +37,9 @@ jobs:
   backend:
     runs-on: ubuntu-latest
 
+    env:
+      NODE_ENV: test
+
     defaults:
       run:
         working-directory: lost_and_found/backend

@@ -2,23 +2,20 @@ export const BACKEND_BASE = import.meta.env.VITE_BACKEND_BASE || 'http://localho
 export const API_BASE = `${BACKEND_BASE}/api`;
 
 export async function login({ email, password }) {
-    try {
-        const response = await fetch(`${API_BASE}/auth/login`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
-            body: JSON.stringify({ email, password })
-        });
+    const response = await fetch(`${API_BASE}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ email, password })
+    });
 
-        if (!response.ok) {
-            throw new Error(`HTTP error; status: ${response.status}`);
-        }
-
-        const loginData = await response.json();
-        return loginData;
-    } catch (error) {
-        console.error('Error during fetch', error);
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || `HTTP error; status: ${response.status}`);
     }
+
+    const loginData = await response.json();
+    return loginData;
 }
 
 export async function signup({ name, email, password }) {

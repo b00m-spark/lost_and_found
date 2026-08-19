@@ -60,7 +60,10 @@ router.post("/", upload.single("image"), (req, res) => {
 // Get all posts
 router.get("/", (req, res) => {
   getAllPosts((err, results) => {
-    if (err) return res.status(500).json({ message: "Error fetching posts" });
+    if (err) {
+      console.error("Error fetching posts:", err);
+      return res.status(500).json({ message: "Error fetching posts" });
+    }
     res.json(results);
   });
 });
@@ -69,7 +72,10 @@ router.get("/", (req, res) => {
 router.get("/type/:type", (req, res) => {
     const {type} = req.params;
     getPostsByType(type, (err, results) => {
-        if (err) return res.status(500).json({ message: "Error fetching posts of lost/found type" });
+        if (err) {
+          console.error("Error fetching posts by type:", err);
+          return res.status(500).json({ message: "Error fetching posts of lost/found type" });
+        }
         res.json(results);
     });
 });
@@ -78,7 +84,10 @@ router.get("/type/:type", (req, res) => {
 router.get("/user/:userid", (req, res) => {
     const {userid} = req.params;
     getPostsByUserId(userid, (err, results) => {
-        if (err) return res.status(500).json({ message: "Error fetching posts by user"});
+        if (err) {
+          console.error("Error fetching posts by user:", err);
+          return res.status(500).json({ message: "Error fetching posts by user"});
+        }
         res.json(results);
     });
 });
@@ -91,7 +100,10 @@ router.get("/me", (req, res) => {
   }
   const userId = req.session.user.id;
   getPostsByUserId(userId, (err, results) => {
-      if (err) return res.status(500).json({ message: "Error fetching posts by user"});
+      if (err) {
+        console.error("Error fetching current user's posts:", err);
+        return res.status(500).json({ message: "Error fetching posts by user"});
+      }
       res.json(results);
   });
 });
@@ -100,7 +112,10 @@ router.get("/me", (req, res) => {
 router.get("/:id", (req, res) => {
   const { id } = req.params;
   getPostById(id, (err, results) => {
-    if (err) return res.status(500).json({ message: "Error fetching post" });
+    if (err) {
+      console.error("Error fetching post:", err);
+      return res.status(500).json({ message: "Error fetching post" });
+    }
     if (results.length === 0) return res.status(404).json({ message: "Post not found" });
     res.json(results[0]);
   });

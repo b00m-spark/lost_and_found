@@ -21,7 +21,7 @@ export default function Login({ setCurrentUser }) {
     try {
       const userData = await login(loginData);
       const user =
-        userData.user ?? (userData.userId ? { id: userData.userId } : null);
+        userData?.user ?? (userData?.userId ? { id: userData.userId } : null);
 
       if (!user?.id) {
         throw new Error("Invalid response");
