@@ -43,20 +43,22 @@ export default function Login({ setCurrentUser }) {
         <div className="loginCard">
           <h1>Lost & Found</h1>
           <form className="loginForm" action="" onSubmit={handleSubmit}>
-            <label for="email">Email</label>
+            <label htmlFor="email">Email</label>
             <input
               type="text"
               id="email"
               name="email"
               placeholder="Enter your email"
+              maxLength="100"
               onChange={onChange}
             ></input>
-            <label for="password">Password</label>
+            <label htmlFor="password">Password</label>
             <input
               type="password"
               id="password"
               name="password"
               placeholder="Enter password"
+              maxLength="128"
               onChange={onChange}
             ></input>
             {err && <div className="errorMessage"> {err}</div>}

@@ -7,11 +7,27 @@ import { createUser, findUserByEmail } from "../models/userModel.js";
 
 const router = express.Router();
 
+const MAX_NAME_LENGTH = 100;
+const MAX_EMAIL_LENGTH = 100;
+const MAX_PASSWORD_LENGTH = 128;
+
+function isValidAuthText(value, maxLength) {
+  return typeof value === "string" && value.trim().length > 0 && value.length <= maxLength;
+}
+
 // Signup //
 router.post("/signup", (req, res) => {
 
   //extract name, email, and password from req.body
   const { name, email, password } = req.body;
+
+  if (
+    !isValidAuthText(name, MAX_NAME_LENGTH) ||
+    !isValidAuthText(email, MAX_EMAIL_LENGTH) ||
+    !isValidAuthText(password, MAX_PASSWORD_LENGTH)
+  ) {
+    return res.status(400).json({ message: "Invalid signup information" });
+  }
 
   findUserByEmail(email, (err, results) => { //using callback async
     if (err) {
@@ -40,6 +56,13 @@ router.post("/signup", (req, res) => {
 // Login //
 router.post("/login", (req, res) => {
   const { email, password } = req.body;
+
+  if (
+    !isValidAuthText(email, MAX_EMAIL_LENGTH) ||
+    !isValidAuthText(password, MAX_PASSWORD_LENGTH)
+  ) {
+    return res.status(400).json({ message: "Invalid login information" });
+  }
 
   findUserByEmail(email, (err, results) => { //using callback async
     if (err) {

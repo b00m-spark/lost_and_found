@@ -32,16 +32,18 @@ export default function Card({ onClose, onReport }) {
       <div className="cardStylePopup" style={{ width: "400px" }}>
         <h3>Report Item</h3>
         <form onSubmit={handleSubmit} className="formContainer">
-          <label>Title</label>
+          <label htmlFor="post-title">Title</label>
           <input
+            id="post-title"
             type="text"
             value={title}
             required
             onChange={(e) => setTitle(e.target.value)}
           />
 
-          <label>Type</label>
+          <label htmlFor="post-type">Type</label>
           <select
+            id="post-type"
             value={type}
             onChange={(e) => setType(e.target.value)}
             required
@@ -51,15 +53,17 @@ export default function Card({ onClose, onReport }) {
             <option value="Found">Found</option>
           </select>
 
-          <label>Description</label>
+          <label htmlFor="post-description">Description</label>
           <textarea
+            id="post-description"
             value={description}
             required
             onChange={(e) => setDescription(e.target.value)}
           />
 
-          <label>Category</label>
+          <label htmlFor="post-category">Category</label>
           <select
+            id="post-category"
             value={category}
             required
             onChange={(e) => setCategory(e.target.value)}
@@ -74,24 +78,27 @@ export default function Card({ onClose, onReport }) {
             <option value="Other">Other</option>
           </select>
 
-          <label>Location</label>
+          <label htmlFor="post-location">Location</label>
           <input
+            id="post-location"
             type="text"
             value={location}
             required
             onChange={(e) => setLocation(e.target.value)}
           />
 
-          <label>Contact</label>
+          <label htmlFor="post-contact">Contact</label>
           <input
+            id="post-contact"
             type="text"
             value={contact}
             required
             onChange={(e) => setContact(e.target.value)}
           />
 
-          <label>Picture (optional)</label>
+          <label htmlFor="post-image">Picture (optional)</label>
           <input
+            id="post-image"
             type="file"
             accept="image/*"
             onChange={(e) => setImage(e.target.files[0])}

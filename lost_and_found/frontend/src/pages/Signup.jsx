@@ -65,6 +65,7 @@ export default function Signup() {
               id="email"
               name="email"
               placeholder="Enter your email"
+              maxLength="100"
               onChange={onChange}
             ></input>
             <label htmlFor="name">Full name</label>
@@ -73,6 +74,7 @@ export default function Signup() {
               id="name"
               name="name"
               placeholder="Enter full name"
+              maxLength="100"
               onChange={onChange}
             ></input>
             <label htmlFor="password">Password</label>
@@ -81,6 +83,7 @@ export default function Signup() {
               id="password"
               name="password"
               placeholder="Enter your password"
+              maxLength="128"
               onChange={onChange}
             ></input>
             {err && <div className="errorMessage">{err}</div>}
