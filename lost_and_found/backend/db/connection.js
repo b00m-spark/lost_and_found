@@ -12,9 +12,11 @@ const db = mysql.createConnection({
   database: process.env.DB_NAME
 });
 
-db.connect((err) => {
-  if (err) throw err;
-  console.log("MySQL connected!");
-});
+if (process.env.NODE_ENV !== "test") {
+  db.connect((err) => {
+    if (err) throw err;
+    console.log("MySQL connected!");
+  });
+}
 
 export default db;

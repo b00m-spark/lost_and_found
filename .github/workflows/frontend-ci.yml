@@ -1,4 +1,4 @@
-name: Frontend CI
+name: Full Stack CI
 
 on:
   push:
@@ -33,3 +33,27 @@ jobs:
 
       - name: Build frontend
         run: npm run build
+
+  backend:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: lost_and_found/backend
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: lost_and_found/backend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run backend tests
+        run: npm test
