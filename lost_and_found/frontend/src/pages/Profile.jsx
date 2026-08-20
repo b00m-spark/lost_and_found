@@ -39,6 +39,11 @@ export default function Profile({ posts, setPosts }) {
     );
   };
 
+  const handleDeleted = (postId) => {
+    // creates a new array of posts except the deleted post
+    setPosts((prev) => prev.filter((p) => p.id !== postId));
+  };
+
   return (
     <>
       <div className="headerWrapper">
@@ -70,7 +75,14 @@ export default function Profile({ posts, setPosts }) {
                 <p>Report a Lost/Found item</p>
               ) : (
                 profilePosts.map((post) => (
-                  <CardPost key={post._id} post={post} viewMode="column" isAccountOwner={true} onResolved={handleResolved}/>
+                  <CardPost
+                    key={post.id}
+                    post={post}
+                    viewMode="column"
+                    isAccountOwner={true}
+                    onResolved={handleResolved}
+                    onDeleted={handleDeleted}
+                  />
                 ))
               )}
               </>

@@ -8,6 +8,7 @@ export default function CardPost({
   viewMode = "column",
   isAccountOwner = false,
   onResolved,
+  onDeleted,
   clickable = true,
 }) {
   const isResolved =
@@ -36,7 +37,11 @@ export default function CardPost({
   const handleDelete = async (e) => {
     e.stopPropagation();
     if (window.confirm("Are you sure you want to delete this post?")) {
-      deletePost(post.id);
+      // sends a result to backend to delete the post
+      const result = await deletePost(post.id);
+      if (result) {
+        onDeleted?.(post.id); // the ?. makes sure that onDeleted is passed in as a prop before calling it
+      }
       setShowOptions(false);
     }
   };
@@ -61,7 +66,11 @@ export default function CardPost({
                 </div>
               </div>
             </div>
-            <button className="moreButton" onClick={handleMoreClick}>
+            <button
+              className="moreButton"
+              aria-label="Open post options"
+              onClick={handleMoreClick}
+            >
               ⋯
             </button>
           </div>
